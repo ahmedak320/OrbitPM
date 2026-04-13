@@ -10,21 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b1020;
-      --card: #121a30;
-      --muted: #aab4d0;
-      --text: #eef2ff;
-      --accent: #5eead4;
-      --accent2: #60a5fa;
-      --border: rgba(255,255,255,0.08);
+      --bg: #fafaf9;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --text: #1f2937;
+      --accent: #f97316;
+      --accent2: #0ea5e9;
+      --border: rgba(0,0,0,0.08);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: linear-gradient(180deg, #0b1020 0%, #0f172a 100%);
+      background: linear-gradient(180deg, #fafaf9 0%, #f5f5f4 100%);
       color: var(--text);
       line-height: 1.6;
+      min-height: 100vh;
     }
     .container {
       max-width: 1040px;
@@ -54,7 +55,7 @@
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      color: #04111d;
+      color: #ffffff;
       font-size: 16px;
     }
     .pill {
@@ -68,8 +69,9 @@
       transition: all 0.2s ease;
     }
     .pill:hover {
-      border-color: rgba(94, 234, 212, 0.3);
+      border-color: rgba(249, 115, 22, 0.4);
       color: var(--text);
+      background: rgba(249, 115, 22, 0.05);
     }
     .hero {
       display: grid;
@@ -79,12 +81,11 @@
       padding: 48px 0 28px;
     }
     .hero-card, .section-card {
-      background: rgba(18, 26, 48, 0.78);
+      background: var(--card);
       border: 1px solid var(--border);
       border-radius: 24px;
       padding: 28px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
     }
     h1 {
       margin: 0 0 12px;
@@ -130,15 +131,15 @@
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(94, 234, 212, 0.25);
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
     }
     .btn-secondary {
       border: 1px solid var(--border);
       color: var(--text);
     }
     .btn-secondary:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.03);
+      border-color: rgba(0,0,0,0.15);
     }
     .grid {
       display: grid;
@@ -153,16 +154,18 @@
       margin-top: 18px;
     }
     .feature {
-      background: rgba(255,255,255,0.02);
+      background: #ffffff;
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 22px;
       transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
     .feature:hover {
-      background: rgba(255,255,255,0.04);
-      border-color: rgba(255,255,255,0.12);
+      background: #ffffff;
+      border-color: rgba(249, 115, 22, 0.2);
       transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     }
     .feature-icon {
       width: 42px;
@@ -173,8 +176,8 @@
       justify-content: center;
       font-size: 20px;
       margin-bottom: 14px;
-      background: linear-gradient(135deg, rgba(94, 234, 212, 0.15), rgba(96, 165, 250, 0.15));
-      border: 1px solid rgba(94, 234, 212, 0.2);
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.12), rgba(14, 165, 233, 0.12));
+      border: 1px solid rgba(249, 115, 22, 0.15);
     }
     .feature h3 {
       font-weight: 600;
@@ -213,7 +216,7 @@
       border-radius: 20px;
       border: 1px solid var(--border);
       overflow: hidden;
-      background: #0a1327;
+      background: #f8fafc;
     }
     .mock-top {
       padding: 12px 16px;
@@ -221,7 +224,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255,255,255,0.02);
+      background: #ffffff;
     }
     .mock-dots {
       display: flex;
@@ -248,10 +251,10 @@
       align-items: center;
       gap: 12px;
       padding: 12px;
-      background: rgba(255,255,255,0.03);
+      background: #ffffff;
       border-radius: 12px;
       margin-bottom: 10px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,0,0,0.06);
     }
     .task-check {
       width: 18px;
@@ -265,7 +268,7 @@
     }
     .task-text {
       font-size: 13px;
-      color: var(--text);
+      color: var(--muted);
     }
     .task-tag {
       margin-left: auto;
@@ -282,10 +285,11 @@
     }
     .stat-box {
       flex: 1;
-      background: rgba(255,255,255,0.03);
+      background: #ffffff;
       border-radius: 10px;
       padding: 14px;
       text-align: center;
+      border: 1px solid rgba(0,0,0,0.06);
     }
     .stat-number {
       font-size: 24px;
@@ -298,8 +302,8 @@
       margin-top: 4px;
     }
     .savings-card {
-      background: linear-gradient(135deg, rgba(94, 234, 212, 0.1), rgba(96, 165, 250, 0.1));
-      border: 1px solid rgba(94, 234, 212, 0.2);
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.08), rgba(14, 165, 233, 0.08));
+      border: 1px solid rgba(249, 115, 22, 0.15);
       border-radius: 20px;
       padding: 24px;
       text-align: center;
@@ -327,7 +331,7 @@
     .comparison-table td {
       padding: 14px 16px;
       text-align: left;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
     .comparison-table th {
       color: var(--muted);
@@ -343,7 +347,7 @@
       font-weight: 600;
     }
     .check {
-      color: var(--accent);
+      color: #10b981;
       font-weight: 700;
     }
     .cross {
@@ -354,17 +358,17 @@
       gap: 16px;
       align-items: flex-start;
       padding: 18px;
-      background: rgba(255,255,255,0.02);
+      background: #ffffff;
       border-radius: 16px;
       margin-bottom: 12px;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(0,0,0,0.06);
     }
     .step-number {
       width: 36px;
       height: 36px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #04111d;
+      color: #ffffff;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -386,8 +390,8 @@
       margin-top: 16px;
     }
     .spec-item {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.06);
       border-radius: 12px;
       padding: 16px;
     }
@@ -414,7 +418,7 @@
         <div class="logo-icon">O</div>
         OrbitPM
       </div>
-      <a class="pill" href="mailto:contact@orbitpm.com">contact@orbitpm.com</a>
+      <a class="pill" href="mailto:contact@orbitpm.ae">contact@orbitpm.ae</a>
     </nav>
 
     <section class="hero">
@@ -593,7 +597,7 @@
             <td class="price">$28,800+</td>
             <td class="cross">✗ Cloud only</td>
           </tr>
-          <tr style="background: rgba(94, 234, 212, 0.05);">
+          <tr style="background: rgba(249, 115, 22, 0.04);">
             <td><strong>OrbitPM</strong></td>
             <td class="price"><strong>One-time setup</strong></td>
             <td class="price"><strong>~$500/year*</strong></td>
@@ -668,7 +672,7 @@
         </div>
       </div>
       
-      <div style="background: rgba(94, 234, 212, 0.08); border: 1px solid rgba(94, 234, 212, 0.2); border-radius: 12px; padding: 16px; margin-top: 20px;">
+      <div style="background: rgba(249, 115, 22, 0.06); border: 1px solid rgba(249, 115, 22, 0.15); border-radius: 12px; padding: 16px; margin-top: 20px;">
         <strong style="color: var(--accent);">Recommended Providers:</strong> DigitalOcean Droplet ($24/month), AWS EC2 t3.medium, Hetzner CPX21, or any VPS with similar specs.
       </div>
     </section>
@@ -689,8 +693,8 @@
       <h2>Contact</h2>
       <p>Interested in deploying OrbitPM for your organization?</p>
       <div class="actions" style="margin-top: 10px;">
-        <a class="btn btn-primary" href="mailto:contact@orbitpm.com?subject=OrbitPM%20Deployment%20Inquiry">Request Deployment</a>
-        <a class="btn btn-secondary" href="mailto:contact@orbitpm.com">contact@orbitpm.com</a>
+        <a class="btn btn-primary" href="mailto:contact@orbitpm.ae?subject=OrbitPM%20Deployment%20Inquiry">Request Deployment</a>
+        <a class="btn btn-secondary" href="mailto:contact@orbitpm.ae">contact@orbitpm.ae</a>
       </div>
     </section>
 
@@ -703,7 +707,7 @@
       <div class="footer-links">
         <a href="#features">Features</a>
         <a href="#deployment">Deployment</a>
-        <a href="mailto:contact@orbitpm.com">Contact</a>
+        <a href="mailto:contact@orbitpm.ae">Contact</a>
       </div>
     </div>
   </div>
