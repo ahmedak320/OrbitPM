@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OrbitPM - Project Management Platform</title>
+  <meta name="description" content="Self-hosted project management platform with real-time collaboration, AI assistance, and powerful integrations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121a30;
+      --muted: #aab4d0;
+      --text: #eef2ff;
+      --accent: #5eead4;
+      --accent2: #60a5fa;
+      --border: rgba(255,255,255,0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #0b1020 0%, #0f172a 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #04111d;
+      font-size: 16px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    .pill:hover {
+      border-color: rgba(94, 234, 212, 0.3);
+      color: var(--text);
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      align-items: center;
+      padding: 48px 0 28px;
+    }
+    .hero-card, .section-card {
+      background: rgba(18, 26, 48, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 28px;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+    p { margin: 0 0 14px; color: var(--muted); }
+    .accent {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #04111d;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(94, 234, 212, 0.25);
+    }
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.15);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .feature {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      transition: all 0.2s ease;
+    }
+    .feature:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.15), rgba(96, 165, 250, 0.15));
+      border: 1px solid rgba(94, 234, 212, 0.2);
+    }
+    .feature h3 {
+      font-weight: 600;
+    }
+    .list {
+      padding-left: 18px;
+      color: var(--muted);
+      margin: 0;
+    }
+    .list li {
+      margin-bottom: 8px;
+    }
+    .footer {
+      padding: 26px 0 40px;
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--text);
+    }
+    .mock {
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: #0a1327;
+    }
+    .mock-top {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.02);
+    }
+    .mock-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .mock-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .mock-dot.red { background: #ef4444; }
+    .mock-dot.yellow { background: #eab308; }
+    .mock-dot.green { background: #22c55e; }
+    .mock-title {
+      font-size: 13px;
+      color: var(--muted);
+      margin-left: 8px;
+    }
+    .mock-content {
+      padding: 16px;
+    }
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .task-check {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--accent);
+      border-radius: 5px;
+      flex-shrink: 0;
+    }
+    .task-check.done {
+      background: var(--accent);
+    }
+    .task-text {
+      font-size: 13px;
+      color: var(--text);
+    }
+    .task-tag {
+      margin-left: auto;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(96, 165, 250, 0.15);
+      color: var(--accent2);
+    }
+    .stats-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .stat-box {
+      flex: 1;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .savings-card {
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.1), rgba(96, 165, 250, 0.1));
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+    }
+    .savings-amount {
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 10px 0;
+    }
+    .savings-label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+    .comparison-table th,
+    .comparison-table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-table th {
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .comparison-table td {
+      color: var(--text);
+    }
+    .comparison-table .price {
+      font-weight: 600;
+    }
+    .check {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .cross {
+      color: #ef4444;
+    }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px;
+      background: rgba(255,255,255,0.02);
+      border-radius: 16px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #04111d;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content h4 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+    .step-content p {
+      margin: 0;
+      font-size: 14px;
+    }
+    .server-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .spec-item {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .spec-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .spec-value {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    @media (max-width: 860px) {
+      .hero, .grid, .grid-2, .server-specs { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <div class="logo">
+        <div class="logo-icon">O</div>
+        OrbitPM
+      </div>
+      <a class="pill" href="mailto:contact@orbitpm.com">contact@orbitpm.com</a>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="pill">Self-hosted Project Management</div>
+        <h1>Manage projects with <span class="accent">AI-powered</span> collaboration.</h1>
+        <p>
+          OrbitPM is a self-hosted project management platform. Features real-time document editing, 
+          task management with multiple views, goal tracking, and seamless integrations with Slack, WhatsApp, and email.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#deployment">Deploy Now</a>
+          <a class="btn btn-secondary" href="#features">Explore Features</a>
+        </div>
+      </div>
+
+      <div class="hero-card" style="padding: 0; overflow: hidden;">
+        <div class="mock">
+          <div class="mock-top">
+            <div class="mock-dots">
+              <div class="mock-dot red"></div>
+              <div class="mock-dot yellow"></div>
+              <div class="mock-dot green"></div>
+            </div>
+            <span class="mock-title">Project Dashboard</span>
+          </div>
+          <div class="mock-content">
+            <div class="stats-row">
+              <div class="stat-box">
+                <div class="stat-number">24</div>
+                <div class="stat-label">Tasks</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">8</div>
+                <div class="stat-label">In Progress</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Done</div>
+              </div>
+            </div>
+            <div style="font-size: 12px; color: var(--muted); margin-bottom: 10px;">Recent Tasks</div>
+            <div class="task-item">
+              <div class="task-check done"></div>
+              <span class="task-text">Design system documentation</span>
+              <span class="task-tag">Done</span>
+            </div>
+            <div class="task-item">
+              <div class="task-check"></div>
+              <span class="task-text">API integration for email sync</span>
+              <span class="task-tag" style="background: rgba(234, 179, 8, 0.15); color: #fde047;">In Progress</span>
+            </div>
+            <div class="task-item">
+              <div class="task-check"></div>
+              <span class="task-text">Q3 goal planning</span>
+              <span class="task-tag" style="background: rgba(239, 68, 68, 0.15); color: #fca5a5;">Todo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section-card">
+      <h2>Core Features</h2>
+      <p>Everything you need to manage projects efficiently, from task tracking to AI-powered insights.</p>
+      <div class="grid">
+        <div class="feature">
+          <div class="feature-icon">📋</div>
+          <h3>Task Management</h3>
+          <p>Multiple views: board, list, calendar, table, and timeline. Organize work the way you prefer.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📝</div>
+          <h3>Real-time Docs</h3>
+          <p>Collaborative document editing with Yjs CRDT. Work together simultaneously without conflicts.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <h3>Goal Tracking</h3>
+          <p>Set and track OKRs and key results. Align your team around measurable objectives.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🤖</div>
+          <h3>AI Assistant</h3>
+          <p>Multi-provider AI integration (OpenAI, Anthropic, Azure, Ollama) for smart suggestions and automation.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Automations</h3>
+          <p>Create rules for scheduled and trigger-based task execution. Reduce manual work.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔌</div>
+          <h3>Integrations</h3>
+          <p>Connect with Slack, WhatsApp, Gmail, and Outlook. Keep all communications in one place.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" style="margin-top:18px;">
+      <h2>📱 WhatsApp & Email Integration</h2>
+      <p>Stay connected with your team and clients where they already are. OrbitPM integrates directly with WhatsApp and email, turning conversations into actionable tasks without switching between apps.</p>
+      <p style="margin-top: 12px;">Receive project updates via email and generate tasks automatically from WhatsApp messages. Whether a client sends a request through WhatsApp or a team member emails a project update, OrbitPM captures it and creates tasks instantly—no manual data entry needed.</p>
+      <p style="margin-top: 12px;">OrbitPM enables businesses to communicate with clients and stakeholders via WhatsApp for project updates, requests, and confirmations.</p>
+      <div class="grid" style="margin-top: 20px;">
+        <div class="feature">
+          <div class="feature-icon">💬</div>
+          <h3>WhatsApp to Tasks</h3>
+          <p>Automatically convert incoming WhatsApp messages into tasks with assignees, due dates, and priorities.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📧</div>
+          <h3>Email Integration</h3>
+          <p>Send and receive project emails directly in OrbitPM. Email threads become comment streams on tasks.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔄</div>
+          <h3>Two-Way Sync</h3>
+          <p>Reply to task comments via email or WhatsApp and keep everyone in the loop automatically.</p>
+        </div>
+      </div>
+      <ul class="list" style="margin-top: 24px;">
+        <li>Client request intake via WhatsApp</li>
+        <li>Status updates to customers</li>
+        <li>Automated confirmations and notifications</li>
+      </ul>
+      <p style="margin-top: 20px; font-size: 14px; color: var(--muted);">WhatsApp is used strictly for transactional and service-related communication, not for promotional messaging.</p>
+    </section>
+
+    <section class="section-card" style="margin-top:18px;">
+      <h2>Cost Savings</h2>
+      <p>Stop paying per-user fees. OrbitPM runs on your infrastructure with predictable costs.</p>
+      
+      <div class="grid-2" style="margin-top: 24px;">
+        <div class="savings-card">
+          <div class="savings-label">Annual Savings for 50 Users</div>
+          <div class="savings-amount">$15,000+</div>
+          <div class="savings-label">Compared to Asana or Monday.com Business plans</div>
+        </div>
+        <div class="savings-card">
+          <div class="savings-label">Annual Savings for 100 Users</div>
+          <div class="savings-amount">$35,000+</div>
+          <div class="savings-label">Compared to Asana or Monday.com Enterprise plans</div>
+        </div>
+      </div>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Price per User/Month</th>
+            <th>50 Users/Year</th>
+            <th>100 Users/Year</th>
+            <th>Data Control</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Asana Business</td>
+            <td class="price">$24.99</td>
+            <td class="price">$14,994</td>
+            <td class="price">$29,988</td>
+            <td class="cross">✗ Cloud only</td>
+          </tr>
+          <tr>
+            <td>Monday.com Pro</td>
+            <td class="price">$16</td>
+            <td class="price">$9,600</td>
+            <td class="price">$19,200</td>
+            <td class="cross">✗ Cloud only</td>
+          </tr>
+          <tr>
+            <td>Monday.com Enterprise</td>
+            <td class="price">$24+</td>
+            <td class="price">$14,400+</td>
+            <td class="price">$28,800+</td>
+            <td class="cross">✗ Cloud only</td>
+          </tr>
+          <tr style="background: rgba(94, 234, 212, 0.05);">
+            <td><strong>OrbitPM</strong></td>
+            <td class="price"><strong>One-time setup</strong></td>
+            <td class="price"><strong>~$500/year*</strong></td>
+            <td class="price"><strong>~$900/year*</strong></td>
+            <td class="check">✓ Self-hosted</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size: 12px; margin-top: 12px;">* Estimated server costs. Actual costs depend on your hosting provider and usage.</p>
+    </section>
+
+    <section id="deployment" class="section-card" style="margin-top:18px;">
+      <h2>Deployment</h2>
+      <p>Get OrbitPM running on your infrastructure in minutes.</p>
+      
+      <h3 style="margin-top: 24px; font-size: 18px;">Deployment Steps</h3>
+      <div style="margin-top: 16px;">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Provision Your Server</h4>
+            <p>Choose a VPS or dedicated server that meets the requirements below. We recommend Ubuntu 22.04 LTS or Debian 12.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Install Docker & Docker Compose</h4>
+            <p>OrbitPM ships with Docker Compose configuration. Install Docker and clone the deployment repository to your server.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Configure Environment</h4>
+            <p>Set up your environment variables including database connection, encryption keys, and SMTP settings for email notifications.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Launch with Docker Compose</h4>
+            <p>Run <code>docker compose up -d</code> to start all services. The app will be available on port 3000 with WebSocket on port 1234.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <h4>Configure SSL & Domain</h4>
+            <p>Set up Nginx or Traefik as a reverse proxy with SSL certificates. Point your domain to the server and you're live.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 28px; font-size: 18px;">Server Requirements</h3>
+      <div class="server-specs">
+        <div class="spec-item">
+          <div class="spec-label">CPU</div>
+          <div class="spec-value">2+ Cores</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">RAM</div>
+          <div class="spec-value">4 GB Minimum</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Storage</div>
+          <div class="spec-value">20 GB SSD</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Database</div>
+          <div class="spec-value">PostgreSQL 16</div>
+        </div>
+      </div>
+      
+      <div style="background: rgba(94, 234, 212, 0.08); border: 1px solid rgba(94, 234, 212, 0.2); border-radius: 12px; padding: 16px; margin-top: 20px;">
+        <strong style="color: var(--accent);">Recommended Providers:</strong> DigitalOcean Droplet ($24/month), AWS EC2 t3.medium, Hetzner CPX21, or any VPS with similar specs.
+      </div>
+    </section>
+
+    <section class="section-card" style="margin-top:18px;">
+      <h2>Why OrbitPM</h2>
+      <ul class="list">
+        <li><strong>Full Data Control</strong> — Your data stays on your servers, not in someone else's cloud</li>
+        <li><strong>Multi-tenant Architecture</strong> — Secure workspace isolation with role-based access control</li>
+        <li><strong>Progressive Web App</strong> — Works offline with native app-like experience</li>
+        <li><strong>Modern Tech Stack</strong> — Built with Next.js 14, React 18, TypeScript, and PostgreSQL</li>
+        <li><strong>Real-time Collaboration</strong> — WebSocket-powered live updates and document editing</li>
+        <li><strong>Portable Edition</strong> — SQLite option for lightweight deployments</li>
+      </ul>
+    </section>
+
+    <section class="section-card" style="margin-top:18px;">
+      <h2>Contact</h2>
+      <p>Interested in deploying OrbitPM for your organization?</p>
+      <div class="actions" style="margin-top: 10px;">
+        <a class="btn btn-primary" href="mailto:contact@orbitpm.com?subject=OrbitPM%20Deployment%20Inquiry">Request Deployment</a>
+        <a class="btn btn-secondary" href="mailto:contact@orbitpm.com">contact@orbitpm.com</a>
+      </div>
+    </section>
+
+    <div style="text-align: center; padding: 16px 0; color: var(--muted); font-size: 13px;">
+        Messages are only sent to users who have opted in to receive communication via WhatsApp.
+      </div>
+
+    <div class="footer">
+      <div>© 2026 OrbitPM. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#deployment">Deployment</a>
+        <a href="mailto:contact@orbitpm.com">Contact</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
